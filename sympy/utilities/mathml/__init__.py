@@ -36,7 +36,7 @@ def apply_xsl(mml, xsl):
     from lxml import etree
     s = etree.XML(get_resource(xsl).read())
     transform = etree.XSLT(s)
-    doc = etree.XML(mml)
+    doc = etree.XML(mml, parser=etree.XMLParser(resolve_entities=False))
     result = transform(doc)
     s = str(result)
     return s
